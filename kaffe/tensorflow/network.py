@@ -242,3 +242,10 @@ class Network(object):
     def dropout(self, input, keep_prob, name):
         keep = 1 - self.use_dropout + (self.use_dropout * keep_prob)
         return tf.nn.dropout(input, keep, name=name)
+    
+    @layer
+    def flatten(self,input):
+        dim = 1
+        for d in input.get_shape()[1:].as_list():
+            dim *= d
+        return tf.reshape(input,[-1,dim])

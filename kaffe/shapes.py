@@ -25,7 +25,11 @@ def get_strided_kernel_output_shape(node, round_func):
 
 def shape_not_implemented(node):
     raise NotImplementedError
-
+#add by yuan for deepid begin
+def shape_flatten(node):
+    input_shape = node.get_only_parent().output_shape
+    return (input_shape[0], input_shape[1]*input_shape[2]*input_shape[3], 1, 1)
+#add end
 
 def shape_identity(node):
     assert len(node.parents) > 0
